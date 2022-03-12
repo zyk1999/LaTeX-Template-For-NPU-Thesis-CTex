@@ -1,0 +1,154 @@
+\usepackage[backend=biber,style=gb7714-2015]{biblatex}
+\renewcommand\bibfont{\fontsize{10bp}{12bp}\selectfont}
+\setlength{\bibitemsep}{2bp}
+\setlength{\labelnumberwidth}{0.8cm}
+\setlength{\biblabelsep}{0.2cm}
+\setlength{\bibhang}{0cm}
+
+
+
+
+\ctexset{
+	chapter={
+		name={第~,~章},
+		number=\chinese{chapter},
+		numbering=true,
+		format = \centering\heiti\zihao{3},
+		beforeskip=15pt,
+		tocline=\CTEXifname{\protect\numberline{第\chinese{#1}章}}{}#2,
+		afterskip=20pt,
+	},
+	section={
+		format=\zihao{-3},
+		titleformat+=\heiti,
+		numberformat+=\bfseries,
+		aftername=\hspace{5pt},
+	},
+	subsection={
+		format=\zihao{4},
+		titleformat+=\heiti,
+		numberformat+=\bfseries,
+		aftername=\hspace{5pt},
+	},
+	contentsname=目~录
+}
+
+%---------------------------------纸张大小设置---------------------------------%
+\usepackage{geometry}
+% 普通A4格式缩进
+% \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+% 论文标准缩进
+\geometry{left=1.25in,right=1.25in,top=1in,bottom=1.5in}
+%------------------------------------------------------------------------------%
+\usepackage{titletoc}
+
+%----------------------------------必要库支持----------------------------------%
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{layouts}
+\usepackage{clrscode}
+\usepackage{gensymb}
+\usepackage[final]{pdfpages}
+%------------------------------------------------------------------------------%
+
+%------------------------------添加插图与表格控制------------------------------%
+\usepackage{graphicx}
+\usepackage[font=small,labelsep=quad]{caption}
+\usepackage{wrapfig}
+\usepackage{multirow,makecell}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{setspace}
+\captionsetup[table]{labelfont=bf,textfont=bf}
+\usepackage{adjustbox}
+%------------------------------------------------------------------------------%
+
+%---------------------------------添加列表控制---------------------------------%
+\usepackage{enumerate}
+\usepackage{enumitem}
+%------------------------------------------------------------------------------%
+\usepackage{listings}
+%--------------------------------添加书签超链接--------------------------------%
+\usepackage[unicode=true,colorlinks=false,pdfborder={0 0 0}]{hyperref}
+% 在此处修改打开文件操作
+\hypersetup{
+	bookmarks=true,         % show bookmarks bar?
+	pdftoolbar=true,        % show Acrobat’s toolbar?
+	pdfmenubar=true,        % show Acrobat’s menu?
+	pdffitwindow=true,      % window fit to page when opened
+	pdfstartview={FitH},    % fits the width of the page to the window
+	pdfnewwindow=true,      % links in new PDF window
+}
+% 在此处添加文章基础信息
+\hypersetup{
+	pdftitle={title},
+	pdfauthor={author},
+	pdfsubject={subject},
+	pdfcreator={creator},
+	pdfproducer={producer},
+	pdfkeywords={key1  key2  key3}
+}
+%------------------------------------------------------------------------------%
+
+\setCJKfamilyfont{nwpu}[Path=settings/]{nwpuname}
+% 新建字体命令，统一前缀f(a.k.a font)
+\newcommand{\fNWPU}{\CJKfamily{nwpu}}
+
+\makeatletter
+\newcommand\coverunderline[2][4cm]{{\hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt}}
+
+%---------------------------------设置页眉页脚---------------------------------%
+\usepackage{fancyhdr}
+\usepackage{fancyref}
+%\addtolength{\headsep}{-0.1cm}          %页眉位置
+%\addtolength{\footskip}{-0.1cm}         %页脚位置
+\addtolength{\topmargin}{0.2cm}
+\newcommand{\makeheadrule}{
+	\makebox[0pt][l]{\rule[.7\baselineskip]{\headwidth}{0.8pt}}
+	\vskip-.8\baselineskip
+}
+\makeatletter
+\renewcommand{\headrule}{%
+	{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi\makeheadrule}}
+\pagestyle{fancyplain}
+\fancyhf{}
+\fancyfoot[C,C]{\zihao{5}-~\thepage~-}
+% 后续文字可以自行修改
+\chead{\zihao{3}\raisebox{0.04cm}%
+	{　\fNWPU 西北工业大学} \songti{{\textbf{本科毕业设计论文}　}}}
+%------------------------------------------------------------------------------%
+
+%\dottedcontents{section}[1.16cm]{}{1.8em}{5pt}
+%\dottedcontents{subsection}[2.00cm]{}{2.7em}{5pt}
+%\dottedcontents{subsubsection}[2.86cm]{}{3.4em}{5pt}
+
+\newcommand{\cptid}[1]{第\chinese{#1}章}
+
+\titlecontents{chapter}[0pt]{\heiti\vspace{0pt}}%
+{\contentsmargin{0pt}\heiti\makebox[0pt][l]{\thecontentslabel}\hspace{3.8em}}%
+{\contentsmargin{0pt}\heiti}%
+{\titlerule*[.4pc]{$\cdot$}\contentspage}[\vspace{0em}]
+
+\titlecontents{section}[0.5cm]{\songti\vspace{-1pt}}%
+{\contentsmargin{0pt}\songti\makebox[0pt][l]{{\thecontentslabel}}\hspace{1.8em}}%
+{\contentsmargin{0pt}\songti}%
+{\titlerule*[.4pc]{$\cdot$}\contentspage}[\vspace{0em}]
+
+\titlecontents{subsection}[1.00cm]{\songti\vspace{-1pt}}%
+{\contentsmargin{0pt}\songti\makebox[0pt][l]{{\thecontentslabel}}\hspace{2.7em}}%
+{\contentsmargin{0pt}\songti}%
+{\titlerule*[.4pc]{$\cdot$}\contentspage}[\vspace{0em}]
+
+\titlecontents{subsubsection}[1.5cm]{\songti\vspace{-1pt}}%
+{\contentsmargin{0pt}\songti\makebox[0pt][l]{{\thecontentslabel}}\hspace{3.4em}}%
+{\contentsmargin{0pt}\songti}%
+{\titlerule*[.4pc]{$\cdot$}\contentspage}[\vspace{0em}]
+
+
+
+\newcommand\eqrefe[1]{式(\ref{#1})}
+\newcommand{\turefe}[1]{图\ref{#1}}
+
+
+\endinput
